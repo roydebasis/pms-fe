@@ -1,0 +1,53 @@
+/* ============================================================
+   Tailwind CSS v4 — incremental setup
+
+   Only the theme and utilities layers are imported: Tailwind's
+   preflight is intentionally omitted so the existing reset and
+   component classes in main.css keep working unchanged.
+
+   Design tokens from main.css are bridged into Tailwind's theme
+   with `@theme inline`, so utilities such as `bg-primary`,
+   `text-muted` or `border-border` resolve to the same variables
+   used by the hand-written CSS and follow the active theme.
+   ============================================================ */
+
+@layer theme, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* Match the app's existing theme switch: <html data-mode="dark"> */
+@custom-variant dark (&:where([data-mode="dark"], [data-mode="dark"] *));
+
+@theme static inline {
+  --font-sans: var(--font);
+
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-ink: var(--text);
+  --color-muted: var(--text-muted);
+  --color-subtle: var(--text-subtle);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-text: var(--primary-text);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-violet: var(--violet);
+  --color-violet-soft: var(--violet-soft);
+
+  --radius-card: var(--radius);
+  --shadow-card: var(--shadow-md);
+}
