@@ -4,9 +4,8 @@ node_modules/
 # Build output
 dist/
 
-# Local editor / harness files
+# Local editor files
 .idea/
-.opencode/
 .vscode/
 
 # Logs
