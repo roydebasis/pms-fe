@@ -17,6 +17,7 @@ export default {
     heroStart: 'বিনামূল্যে শুরু করুন',
     heroSeePlans: 'প্ল্যান দেখুন',
     heroNote: 'কোনো ক্রেডিট কার্ড লাগবে না · কয়েক মিনিটেই সেটআপ',
+    trustBadge: 'সম্পত্তি দলের বিশ্বস্ত পছন্দ',
 
     // Mock dashboard preview
     previewTitle: 'পোর্টফোলিও সারাংশ',

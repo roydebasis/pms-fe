@@ -17,6 +17,7 @@ export default {
     heroStart: 'Start for free',
     heroSeePlans: 'See plans',
     heroNote: 'No credit card required · Set up in minutes',
+    trustBadge: 'Trusted by property teams everywhere',
 
     // Mock dashboard preview
     previewTitle: 'Portfolio overview',
