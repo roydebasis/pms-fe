@@ -54,6 +54,15 @@ npm run build     # production build into dist/
 npm run preview   # serve the production build locally
 ```
 
+## Backend API (live mode)
+
+The UI also supports an API-backed mode. Copy `.env.example` to `.env`, set
+`VITE_API_BASE_URL` to a shared backend URL (for example an ngrok host), and
+see `docs/API_INTEGRATION.md`. OpenAPI contracts are pinned in
+`docs/api/openapi/`; run `npm run api:sync` after a backend release and commit
+the regenerated files. The app never fetches specs at runtime, so `npm run dev`
+and `npm run build` work without the backend running.
+
 ## Project structure
 
 ```text

@@ -2,9 +2,9 @@
 
 ## 1. Purpose and boundaries
 
-Zoniq UI is a single-page property-management admin UI built from `zoniq_erd.html`. It is a **self-contained front-end prototype**: the ERD is the source of truth for the data model, Pinia is the source of truth for runtime state, and `localStorage` is the source of truth across reloads.
+Zoniq UI is a single-page property-management admin UI. It supports two modes: `demo` (self-contained prototype backed by `seed.js` and `localStorage`, as originally built from `zoniq_erd.html`) and `live` (backed by the `pms-be` API). Pinia remains the source of runtime state; in live mode its actions call a single API client and the API DTOs replace the seed entities.
 
-Out of scope: real authentication, authorization enforcement, HTTP APIs, persistence servers, multi-user sync, and real payment processing.
+Out of scope: implementing backend endpoints, calling webhook routes from the UI, or fetching OpenAPI specs at runtime. Contracts are pinned in `docs/api/openapi/` and refreshed with `npm run api:sync`; see `docs/API_INTEGRATION.md`.
 
 ## 2. Architecture
 
@@ -26,6 +26,13 @@ seed.js ──▶ Pinia store ──▶ views ──▶ router
 - `src/i18n/` — Vue I18n instance, locale persistence (`zoniq-locale`), and per-locale message fragments under `locales/{en,bn}/`. `shell.js` holds shared navigation, status, common and route-message keys; each view area owns one fragment file per language.
 - `src/composables/useUi.js` — theme preference, toast queue, and a counted body-scroll lock used by modals/drawers.
 - `src/utils/format.js` — `currency`, `compactCurrency`, `formatDate`, `formatShortDate`, `formatTodayLong`, `relativeDate`, `initials`, `titleCase`, `todayISO`.
+
+### API-backed additions
+
+- `docs/api/openapi/*.json` — pinned OpenAPI documents for staff, renter, platform and webhooks, refreshed from live URLs by `npm run api:sync` (see `docs/api/CONTRACT.md`).
+- `docs/API_INTEGRATION.md` — environment variables, auth, envelope, pagination, module→surface map and contract workflow.
+- `src/api/` (planned) — single HTTP client used by store actions in live mode; views continue to call store actions.
+- The ERD mapping below describes the demo dataset. In live mode, API DTOs are authoritative: for example `lease_tenants` was replaced by `lease_renters`, and new F-24…F-31 resources (expenses, reports, audit events, payment sessions/refunds) exist only via the API.
 
 ## 3. ERD → implementation mapping
 

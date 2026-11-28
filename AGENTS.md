@@ -1,10 +1,21 @@
 # Project instructions for AI assistants
 
-Applies to all work in `D:\Projects\HERD\zoniq-ui`. Read `README.md` for setup and `docs/SPEC.md` for architecture before making changes.
+Applies to all work in `D:\Projects\HERD\zoniq-ui`. Read `README.md`, `docs/SPEC.md`, `docs/API_INTEGRATION.md` and `docs/api/_conventions.md` before making changes.
 
 ## Scope
 
-This is a **front-end demo** of a property management system. There is no API, no authentication, and no database. Do not introduce backend calls, SDKs, or build-time services. All data lives in the browser.
+This is a Vue 3 SPA with two modes: `demo` (seeded local data, as before) and `live` (backed by the `pms-be` API). API contracts are pinned in `docs/api/openapi/` and refreshed with `npm run api:sync`. Do not invent endpoints, fields or enum values; if the pinned contract does not cover what is needed, stop and ask.
+
+## API-backed conventions
+
+1. Read `docs/api/CONTRACT.md` and the pinned spec for the surface you are changing. Never fetch a live URL from application code or from an AI task.
+2. Runtime API base comes from `VITE_API_BASE_URL`; tokens are Sanctum bearer tokens and never logged.
+3. Success is `{status, message, data}`; errors are `{status: "error", error_code, message, errors}`. Branch on `error_code`, never on message text.
+4. Lists return `data` as an array plus `meta`/`links`; only `?page=` is supported, page size 20.
+5. Money is a decimal string (default `BDT`); API dates are `YYYY-MM-DD`, display formatting stays in `src/utils/format.js`.
+6. Foreign/unauthorized ids return `404`; do not reveal existence or register email availability.
+7. Staff, renter and platform tokens are distinct; never mix surfaces. The UI does not call webhooks.
+8. Gateway selection is explicit via the payment method's `gateway` field (`stripe`/`sslcommerz`/`null`).
 
 ## Non-negotiable conventions
 
@@ -26,6 +37,7 @@ This is a **front-end demo** of a property management system. There is no API, n
 
 ## Adding a new module (checklist)
 
+- [ ] Pinned API contract checked (`docs/api/openapi/*`) or `npm run api:sync` run after a backend release
 - [ ] Entity + sample rows in `src/data/seed.js` and `createSeedState()`
 - [ ] Getters/actions in `src/stores/app.js`, scoped to the active organization
 - [ ] Route in `src/router/index.js` + nav item in `src/data/navigation.js`
