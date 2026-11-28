@@ -13,7 +13,9 @@ has tests so far; store and view tests arrive with their tasks.
 | Coverage | **@vitest/coverage-v8 5.1** | V8-based, version-matched to Vitest. |
 | E2E (later phase) | **Playwright 1.65** | Real browser flows: login guard, token handling, dark mode and narrow viewport. Install only when E2E work starts. |
 
-Versions verified against npm on 2026-11-29; Node 24.22.1.
+Versions verified against npm on 2026-11-29. Minimum runtime is **Node 24.22.1**, declared via
+`engines` in `package.json`, pinned in `.nvmrc`, and enforced by `engine-strict=true` in `.npmrc`;
+CI uses the exact version.
 
 ## Install (done in `P1.0`)
 

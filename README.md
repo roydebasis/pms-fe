@@ -37,7 +37,8 @@ The topbar language menu switches between **English** (default) and **বাং�
 
 ## Quick start
 
-Prerequisites: **Node.js 20+** and npm.
+Prerequisites: **Node.js >= 24.22.1** and npm. The exact version is pinned in `.nvmrc`
+(`nvm use`) and enforced by the `engines` field in `package.json`.
 
 ```powershell
 cd D:\Projects\HERD\zoniq-ui
