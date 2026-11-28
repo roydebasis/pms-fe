@@ -69,6 +69,25 @@ html[lang='bn'] {
   --font: 'Noto Sans Bengali', 'Inter', 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+/* Bangla needs a little more line height and no tracking for readable conjuncts. */
+html[lang='bn'] body {
+  line-height: 1.7;
+  letter-spacing: 0;
+}
+html[lang='bn'] h1,
+html[lang='bn'] h2,
+html[lang='bn'] h3,
+html[lang='bn'] .hero-title,
+html[lang='bn'] .section-heading,
+html[lang='bn'] .trust-statement {
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+html[lang='bn'] .eyebrow,
+html[lang='bn'] .trust-eyebrow {
+  letter-spacing: 0;
+}
+
 html[data-mode='dark'] {
   --bg: #0e1320;
   --bg-subtle: #141b2b;
