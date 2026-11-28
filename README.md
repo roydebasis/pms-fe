@@ -140,10 +140,19 @@ Available token utilities include `bg-*`, `text-*`, and `border-*` for `primary`
 - `docs/SPEC.md` — architecture, ERD→entity mapping, state contract and steps to add a module.
 - `docs/API_INTEGRATION.md` — env vars, auth, envelope, pagination and module→surface map for future live mode.
 - `docs/LIVE_API_IMPLEMENTATION_PLAN.md` — tracked task-by-task plan (with AI execution protocol); start here for live-mode work.
-- `docs/TESTING.md` — recommended Vitest/MSW/Playwright toolchain, test layout and rules; scripts are added with Phase 1.
+- `docs/TESTING.md` — Vitest/MSW/happy-dom toolchain, test layout and rules; scripts added in `P1.0`.
+- `.github/workflows/ci.yml` — runs `npm ci`, `npm run test:coverage` and `npm run build` on every push and PR, and uploads the coverage report.
 - `docs/api/CONTRACT.md` and `docs/api/_conventions.md` — pinned contract metadata and API rules; specs live in `docs/api/openapi/`.
 - `.opencode/agents/reviewer.md` — read-only reviewer agent that checks changes against those rules. Run it with **`/review`** (defined in `.opencode/commands/review.md`), or ask: *"Use the reviewer subagent to review my current changes."*
 - `opencode.jsonc` — loads `docs/SPEC.md` as project instructions and ignores generated folders in the file watcher.
+
+### Agent workflow
+
+Three agents are available; use one at a time and follow the per-task protocol in §4 of the plan:
+
+- **`explore`** — read-only inventory: find files, map endpoints, answer "where is X?" questions.
+- **`general`** — implementation: hand it **one task ID** (e.g. `P2.1`) from the live-API plan.
+- **`/review`** (`reviewer`) — read-only gate at the end of each phase; it may run the build and tests but cannot edit files.
 
 ## Notes and limitations
 

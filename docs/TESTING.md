@@ -94,6 +94,7 @@ the covered `src/api/*` modules (`client.js`, `errors.js`, `token.js`) and the i
 | --- | --- | --- |
 | Task | `npm run test -- --run <file>` and `npm run build` | Every task |
 | Phase | `npm run test`, `npm run test:coverage`, `/review` | End of each phase |
+| CI | `.github/workflows/ci.yml`: `npm ci`, `npm run test:coverage`, `npm run build`, coverage artifact | Every push and PR |
 | Release | `npm run test:e2e`, manual light + dark + narrow viewport, no console errors | Before merge |
 
 ## Deferred to E2E phase

@@ -1,5 +1,5 @@
 ---
-description: Read-only reviewer for Zoniq UI changes against AGENTS.md and docs/SPEC.md
+description: Read-only reviewer for Zoniq UI changes against AGENTS.md, docs/SPEC.md, the live-API plan and docs/TESTING.md
 mode: subagent
 permissions:
   - action: edit
@@ -10,6 +10,12 @@ permissions:
     effect: deny
   - action: shell
     resource: "npm run build"
+    effect: allow
+  - action: shell
+    resource: "npm run test"
+    effect: allow
+  - action: shell
+    resource: "npm run test:coverage"
     effect: allow
 ---
 

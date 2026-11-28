@@ -200,7 +200,8 @@ Full guide: [`TESTING.md`](TESTING.md). Chosen toolchain (approval required — 
 - [x] Coverage so far: 100% statements/branches/functions/lines for the covered `src/api/*` modules.
       Store ≥80% and per-view tests are still pending; record results here as they land.
 - [x] Verification ladder documented and used for `P1.0`/`P1.1`: `npm run test`,
-      `npm run test:coverage` and `npm run build` all pass. `/review` at phase end is still pending.
+      `npm run test:coverage` and `npm run build` all pass. CI (`.github/workflows/ci.yml`) runs the
+      same checks on every push/PR. `/review` at phase end is still pending.
 
 ## 4. AI execution workflow
 
