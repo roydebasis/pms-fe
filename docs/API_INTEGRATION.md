@@ -1,5 +1,8 @@
 # API integration guide
 
+Implementation status and the phased work plan live in
+[`LIVE_API_IMPLEMENTATION_PLAN.md`](LIVE_API_IMPLEMENTATION_PLAN.md).
+
 ## Configuration
 
 Copy `.env.example` to `.env` and set:
@@ -33,15 +36,20 @@ backend). Bearer tokens are used, so cross-origin cookies are not required.
   by posting the matching `method` (`card` → Stripe, `sslcommerz`/`bkash`/
   `nagad`/`bank_transfer` → SSLCommerz).
 
-## State strategy
+## State strategy (planned — not implemented)
 
-Keep the existing Pinia store shape, but introduce a single `src/api/` client:
+The app currently runs only in demo mode (`seed.js` + `localStorage`). There is
+no `src/api/` client and no `VITE_API_MODE` switch yet (the variable is listed
+in the plan but is not in `.env.example` or read by the app). The planned
+migration keeps the existing Pinia store shape and introduces a single
+`src/api/` client:
 
-- `demo` mode (`VITE_API_MODE=demo`): current `seed.js` + localStorage behavior.
-- `live` mode (`VITE_API_MODE=live`): store actions call the API client and
-  replace local state with API DTOs; localStorage keeps only token/theme/locale.
+- `demo` mode (`VITE_API_MODE=demo`, planned): current seeded/local behavior.
+- `live` mode (`VITE_API_MODE=live`, planned): store actions call the API client
+  and replace local state with API DTOs; localStorage keeps only token/theme/locale.
 
-Views should keep calling store actions, so the migration is incremental.
+Views should keep calling store actions, so the migration is incremental. See
+[`LIVE_API_IMPLEMENTATION_PLAN.md`](LIVE_API_IMPLEMENTATION_PLAN.md) for phases.
 
 ## Module → surface map
 

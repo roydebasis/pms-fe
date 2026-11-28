@@ -1,0 +1,25 @@
+// Keys map 1:1 to backend error_code values (ApiErrorCode.php).
+export default {
+  errors: {
+    VALIDATION_ERROR: 'Please check the highlighted fields and try again.',
+    UNAUTHENTICATED: 'Your session has expired. Please sign in again.',
+    UNAUTHORIZED: 'You do not have permission to do that.',
+    NOT_FOUND: 'The requested item was not found.',
+    ROUTE_NOT_FOUND: 'That page could not be found.',
+    METHOD_NOT_ALLOWED: 'That action is not allowed.',
+    BAD_METHOD_CALL: 'The request could not be completed.',
+    TOO_MANY_REQUESTS: 'Too many requests. Please try again shortly.',
+    PLAN_EXPIRED: 'Your plan has expired.',
+    INSUFFICIENT_CREDIT: 'You do not have enough credit for this action.',
+    INVALID_CREDENTIALS: 'The email or password is incorrect.',
+    SERVER_ERROR: 'Something went wrong. Please try again later.',
+    RESET_LINK_FAILED: 'We could not create a password reset link.',
+    INVALID_RESET_TOKEN: 'This reset link is invalid or has expired.',
+    EMAIL_ALREADY_VERIFIED: 'This email is already verified.',
+    INVALID_VERIFICATION_LINK: 'This verification link is invalid or has expired.',
+    INVITATION_INVALID: 'This invitation is invalid or has expired.',
+    EMAIL_NOT_VERIFIED: 'Please verify your email first.',
+    CONSENT_REQUIRED: 'Your consent is required to continue.',
+    ALREADY_LINKED: 'This account is already linked.',
+  },
+}

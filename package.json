@@ -7,7 +7,10 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "api:sync": "node scripts/sync-api-contract.mjs"
+    "api:sync": "node scripts/sync-api-contract.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "lucide-vue-next": "^0.577.0",
@@ -19,7 +22,12 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.5",
     "@vitejs/plugin-vue": "^5.2.4",
+    "@vitest/coverage-v8": "^5.1.2",
+    "@vue/test-utils": "^2.6.0",
+    "happy-dom": "^21.0.4",
+    "msw": "^3.0.8",
     "tailwindcss": "^4.3.5",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vitest": "^5.1.2"
   }
 }

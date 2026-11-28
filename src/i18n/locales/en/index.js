@@ -13,9 +13,11 @@ import maintenance from './maintenance'
 import users from './users'
 import roles from './roles'
 import settings from './settings'
+import errors from './errors'
 
 export default {
   ...shell,
+  ...errors,
   ...landing,
   ...auth,
   ...dashboard,

@@ -1,6 +1,6 @@
 # Zoniq — Property Management UI
 
-A modern, responsive single-page application for property management, built with **Vue 3** and modelled directly after the Zoniq entity-relationship diagram. It is a self-contained front-end demo: all data is seeded locally, mutations are persisted in the browser, and no backend is required.
+A modern, responsive single-page application for property management, built with **Vue 3** and modelled directly after the Zoniq entity-relationship diagram. It currently runs as a self-contained front-end demo: all data is seeded locally and mutations are persisted in the browser, so no backend is required. The repository also carries the configuration, pinned API contracts and docs for a future API-backed (live) mode — see [Backend API](#backend-api-live-mode--preparation-only).
 
 ## Features
 
@@ -33,7 +33,7 @@ The topbar language menu switches between **English** (default) and **বাং�
 | Internationalization | Vue I18n 11 (English default, Bengali) |
 | Icons | `lucide-vue-next` |
 | Styling | Hand-written CSS design system + Tailwind CSS v4 utilities (shared tokens, no preflight) |
-| Persistence | `localStorage` |
+| Persistence | `localStorage` (demo mode); API DTOs planned for live mode |
 
 ## Quick start
 
@@ -52,16 +52,31 @@ Other commands:
 ```powershell
 npm run build     # production build into dist/
 npm run preview   # serve the production build locally
+npm run api:sync  # refresh pinned OpenAPI specs from live URLs in .env
+npm run test      # Vitest unit/component tests (MSW-mocked, no live backend)
+npm run test:coverage  # V8 coverage report in coverage/
 ```
 
-## Backend API (live mode)
+## Backend API (live mode — preparation only)
 
-The UI also supports an API-backed mode. Copy `.env.example` to `.env`, set
-`VITE_API_BASE_URL` to a shared backend URL (for example an ngrok host), and
-see `docs/API_INTEGRATION.md`. OpenAPI contracts are pinned in
-`docs/api/openapi/`; run `npm run api:sync` after a backend release and commit
-the regenerated files. The app never fetches specs at runtime, so `npm run dev`
-and `npm run build` work without the backend running.
+Live mode is **not implemented yet**. The app currently always runs in demo
+mode: there is no HTTP client, no `VITE_API_MODE` switch and no backend-backed
+token/org handling. What is in place is the contract workflow:
+
+- `.env.example` defines `VITE_API_BASE_URL` and the `OPENAPI_*` sync URLs.
+  Copy it to `.env` and point it at a shared backend (for example an ngrok host).
+- `docs/api/openapi/` holds pinned OpenAPI specs for staff, renter, platform
+  and webhooks from `pms-be@f6dec10`; `docs/api/CONTRACT.md` records hashes and
+  source URLs.
+- `npm run api:sync` refreshes those files from the live URLs after a backend
+  release — commit the result.
+- `docs/API_INTEGRATION.md` and `docs/api/_conventions.md` describe envelopes,
+  pagination, auth and the module→surface map for when the client is built.
+- `docs/LIVE_API_IMPLEMENTATION_PLAN.md` is the tracked, phased plan for building
+  live mode (client, auth, dual-mode store actions, API-only modules, hardening).
+
+The app never fetches specs at runtime, so `npm run dev` and `npm run build`
+work without the backend running.
 
 ## Project structure
 
@@ -88,7 +103,7 @@ zoniq-ui/
 
 ## Data model
 
-`src/data/seed.js` contains every entity from the ERD, using the same foreign keys:
+The demo dataset in `src/data/seed.js` contains every entity from the ERD, using the same foreign keys (the live API differs in places, e.g. `lease_renters` replaces `LEASE_TENANT`):
 
 `ORGANIZATION`, `USER`, `PROPERTY`, `UNIT`, `LEASE`, `LEASE_TENANT`, `LEASE_RENT_REVISION`, `RENT_INCREMENT_PROPOSAL`, `RENT_CHARGE`, `PAYMENT`, `MAINTENANCE_REQUEST`, `MAINTENANCE_REQUEST_COMMENT`, `ROLE`, `PERMISSION`, `MODEL_HAS_ROLE`, `ROLE_HAS_PERMISSION`, `PERSONAL_ACCESS_TOKEN`.
 
@@ -123,12 +138,16 @@ Available token utilities include `bg-*`, `text-*`, and `border-*` for `primary`
 
 - `AGENTS.md` — conventions and a checklist for AI assistants and future contributors.
 - `docs/SPEC.md` — architecture, ERD→entity mapping, state contract and steps to add a module.
+- `docs/API_INTEGRATION.md` — env vars, auth, envelope, pagination and module→surface map for future live mode.
+- `docs/LIVE_API_IMPLEMENTATION_PLAN.md` — tracked task-by-task plan (with AI execution protocol); start here for live-mode work.
+- `docs/TESTING.md` — recommended Vitest/MSW/Playwright toolchain, test layout and rules; scripts are added with Phase 1.
+- `docs/api/CONTRACT.md` and `docs/api/_conventions.md` — pinned contract metadata and API rules; specs live in `docs/api/openapi/`.
 - `.opencode/agents/reviewer.md` — read-only reviewer agent that checks changes against those rules. Run it with **`/review`** (defined in `.opencode/commands/review.md`), or ask: *"Use the reviewer subagent to review my current changes."*
 - `opencode.jsonc` — loads `docs/SPEC.md` as project instructions and ignores generated folders in the file watcher.
 
 ## Notes and limitations
 
-- This is a UI prototype — there is no API, authentication or real authorization layer; role permissions are demonstration data.
+- In demo mode there is no API, authentication or real authorization layer; role permissions are demonstration data. Live mode is prepared (config, pinned contracts and docs) but not implemented.
 - Monetary amounts and dates are sample values; the current billing period is November 2026.
 - Tables with many columns scroll horizontally on narrow screens; the layout is responsive from mobile upward.
 - The source ERD lives at `D:\Projects\HERD\zoniq\zoniq_erd.html`.

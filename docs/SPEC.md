@@ -31,7 +31,9 @@ seed.js ──▶ Pinia store ──▶ views ──▶ router
 
 - `docs/api/openapi/*.json` — pinned OpenAPI documents for staff, renter, platform and webhooks, refreshed from live URLs by `npm run api:sync` (see `docs/api/CONTRACT.md`).
 - `docs/API_INTEGRATION.md` — environment variables, auth, envelope, pagination, module→surface map and contract workflow.
-- `src/api/` (planned) — single HTTP client used by store actions in live mode; views continue to call store actions.
+- `src/api/` (in progress) — single HTTP client used by store actions in live mode; views continue to call store actions. `client.js`, `errors.js`, `token.js` and `index.js` landed in `P1.0`–`P1.3`; resource modules are pending.
+- `docs/LIVE_API_IMPLEMENTATION_PLAN.md` — tracked, phased implementation plan for live mode, with task IDs, AI execution protocol and decision gates.
+- `docs/TESTING.md` — test toolchain (Vitest/MSW/happy-dom), layout, rules and verification ladder; scripts added in `P1.0`.
 - The ERD mapping below describes the demo dataset. In live mode, API DTOs are authoritative: for example `lease_tenants` was replaced by `lease_renters`, and new F-24…F-31 resources (expenses, reports, audit events, payment sessions/refunds) exist only via the API.
 
 ## 3. ERD → implementation mapping

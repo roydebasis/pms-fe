@@ -1,0 +1,25 @@
+// Keys map 1:1 to backend error_code values (ApiErrorCode.php).
+export default {
+  errors: {
+    VALIDATION_ERROR: 'চিহ্নিত ঘরগুলো পরীক্ষা করে আবার চেষ্টা করুন।',
+    UNAUTHENTICATED: 'আপনার সেশনের মেয়াদ শেষ হয়েছে। আবার সাইন ইন করুন।',
+    UNAUTHORIZED: 'এই কাজের অনুমতি আপনার নেই।',
+    NOT_FOUND: 'অনুসন্ধানকৃত তথ্য পাওয়া যায়নি।',
+    ROUTE_NOT_FOUND: 'এই পেজটি পাওয়া যায়নি।',
+    METHOD_NOT_ALLOWED: 'এই কাজটি অনুমোদিত নয়।',
+    BAD_METHOD_CALL: 'অনুরোধটি সম্পন্ন করা যায়নি।',
+    TOO_MANY_REQUESTS: 'অনেক বেশি অনুরোধ। কিছুক্ষণ পর আবার চেষ্টা করুন।',
+    PLAN_EXPIRED: 'আপনার প্ল্যানের মেয়াদ শেষ হয়েছে।',
+    INSUFFICIENT_CREDIT: 'এই কাজের জন্য পর্যাপ্ত ক্রেডিট নেই।',
+    INVALID_CREDENTIALS: 'ইমেইল বা পাসওয়ার্ড সঠিক নয়।',
+    SERVER_ERROR: 'সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।',
+    RESET_LINK_FAILED: 'পাসওয়ার্ড রিসেট লিঙ্ক তৈরি করা যায়নি।',
+    INVALID_RESET_TOKEN: 'এই রিসেট লিঙ্কটি অবৈধ বা মেয়াদোত্তীর্ণ।',
+    EMAIL_ALREADY_VERIFIED: 'এই ইমেইলটি আগেই যাচাই করা হয়েছে।',
+    INVALID_VERIFICATION_LINK: 'এই যাচাইকরণ লিঙ্কটি অবৈধ বা মেয়াদোত্তীর্ণ।',
+    INVITATION_INVALID: 'এই আমন্ত্রণটি অবৈধ বা মেয়াদোত্তীর্ণ।',
+    EMAIL_NOT_VERIFIED: 'প্রথমে আপনার ইমেইল যাচাই করুন।',
+    CONSENT_REQUIRED: 'এগিয়ে যেতে আপনার সম্মতি প্রয়োজন।',
+    ALREADY_LINKED: 'এই অ্যাকাউন্টটি আগেই সংযুক্ত করা আছে।',
+  },
+}

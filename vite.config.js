@@ -18,4 +18,14 @@ export default defineConfig({
       ignored: ['**/*.zip', '**/dist/**'],
     },
   },
+  // Vitest inherits the `@` alias and plugins from this config.
+  test: {
+    environment: 'happy-dom',
+    // Same origin as the mocked API so happy-dom does not issue a CORS
+    // preflight that MSW has no handler for.
+    environmentOptions: { happyDOM: { url: 'http://localhost:8000/' } },
+    setupFiles: ['./tests/setup.js'],
+    clearMocks: true,
+    restoreMocks: true,
+  },
 })
